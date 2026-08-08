@@ -1,19 +1,5 @@
 services:
-  reqres-tests:
+  tests:
     build: .
-    container_name: reqres-tests
     volumes:
       - ./allure-results:/framework/allure-results
-    command: pytest --alluredir=/framework/allure-results
-
-
-
-  allure-report:
-    image: frankescobar/allure-docker-service
-    volumes:
-      - ./allure-results:/framework/allure-results
-      - ./allure-report:/framework/allure-report
-    command: allure generate -c /framework/allure-results -o /framework/allure-report
-    depends_on:
-      reqres-tests:
-        condition: service_completed_successfully
