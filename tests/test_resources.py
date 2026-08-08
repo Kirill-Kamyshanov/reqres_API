@@ -8,9 +8,10 @@ from services.reqres_in.resources.assertions import (
 from utils.assertions import assert_status_code
 
 
+@pytest.mark.regression
 @allure.feature("Resources")
 class TestResources:
-    @pytest.mark.regression
+
     @allure.title("Получение списка ресурсов")
     @allure.testcase("https://jira.example.com/TC-8", "TC-8")
     def test_get_resources_list(self, api, test_data):
@@ -22,7 +23,7 @@ class TestResources:
         with allure.step("Проверка корректности полученных данных"):
             assert_resources_list(response, validated, page)
 
-    @pytest.mark.regression
+    @pytest.mark.smoke
     @allure.title("Получение одного ресурса")
     @allure.testcase("https://jira.example.com/TC-9", "TC-9")
     def test_get_resource(self, api, test_data):
@@ -34,7 +35,7 @@ class TestResources:
         with allure.step("Проверка корректности полученных данных"):
             assert_resource_data(response, validated, resource_id)
 
-    @pytest.mark.regression
+
     @allure.title("Получение несуществующего ресурса")
     @allure.testcase("https://jira.example.com/TC-10", "TC-10")
     def test_get_unexisted_resource(self, api, test_data):

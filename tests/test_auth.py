@@ -10,10 +10,10 @@ from services.reqres_in.auth.assertions import (
 from services.reqres_in.auth.models.auth import LoginRequest, RegisterRequest
 
 
+@pytest.mark.regression
 @allure.feature("Authentication")
 class TestAuth:
     @pytest.mark.smoke
-    @pytest.mark.regression
     @allure.title("Успешная регистрация")
     @allure.testcase("https://jira.example.com/TC-11", "TC-11")
     def test_register_successful(self, api, test_data):
@@ -27,7 +27,6 @@ class TestAuth:
         with allure.step("Валидация ответа"):
             assert_register_successful(response, validated)
 
-    @pytest.mark.regression
     @allure.title("Регистрация с невалидными входными данными")
     @allure.testcase("https://jira.example.com/TC-12", "TC-12")
     def test_register_negative(self, api, test_data):
@@ -39,7 +38,6 @@ class TestAuth:
             assert_register_failed(response, validated, test_data["auth"]["expected_error"])
 
     @pytest.mark.smoke
-    @pytest.mark.regression
     @allure.title("Успешная авторизация")
     @allure.testcase("https://jira.example.com/TC-13", "TC-13")
     def test_auth_successful(self, api, test_data):
@@ -53,7 +51,6 @@ class TestAuth:
         with allure.step("Валидация ответа"):
             assert_login_successful(response, validated)
 
-    @pytest.mark.regression
     @allure.title("Авторизация с невалидными входными данными")
     @allure.testcase("https://jira.example.com/TC-14", "TC-14")
     def test_auth_negative(self, api, test_data):
