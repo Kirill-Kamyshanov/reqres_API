@@ -11,12 +11,7 @@ from services.reqres_in.api import ReqresApi
 
 def pytest_addoption(parser: pytest.Parser) -> None:
     """Регистрирует CLI-опцию --env для выбора окружения запуска."""
-    parser.addoption(
-        "--env",
-        action="store",
-        default="stage",
-        help="Окружение для запуска тестов (dev/stage)",
-    )
+    parser.addoption("--env", action="store", default="stage", help="Окружение для запуска тестов (dev/stage)")
 
 
 @pytest.fixture(scope="session")

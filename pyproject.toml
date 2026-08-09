@@ -12,10 +12,10 @@ markers = [
     "regression: regression tests",
 ]
 addopts = [
-#    "--alluredir=allure-results",
+    "--alluredir=allure-results",
     "--strict-markers",
     "-ra",
-#    "--reruns=2",
+    "--reruns=2",
     "--reruns-delay=1",
     "--timeout=60",
 ]

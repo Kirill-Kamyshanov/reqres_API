@@ -3,3 +3,6 @@ services:
     build: .
     volumes:
       - ./allure-results:/framework/allure-results
+    command: --env=${ENV:-stage}
+    environment:
+      - REQRES_API_KEY=${REQRES_API_KEY}
