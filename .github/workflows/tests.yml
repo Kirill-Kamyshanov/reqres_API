@@ -1,0 +1,89 @@
+name: run tests
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run_python_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Клонирование кода репозитория на машину Github actions
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Установка Python
+      - name: set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      # Установка зависимостей проекта
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Запуск тестов
+      - name: run tests
+        run: pytest
+        env:
+          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+
+      # Публикация артефакта: /allure-results
+      - name: Upload Test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-results
+          path: allure-results
+
+      # Генерация /allure-report
+      - name: generate allure-report
+        if: always()
+        uses: simple-elf/allure-report-action@v1.15
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+
+      # Публикация артефакта /allure-report
+      - name: Upload allure-report as artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-report
+          path: allure-report
+
+
+
+  deploy_report:
+    needs: run_python_tests
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # Скачивание артефакта с отчётом
+      - name: Download allure-report
+        uses: actions/download-artifact@v8
+        with:
+          name: allure-report
+          path: allure-report
+
+      # Публикация отчёта на GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.TOTOSHKA }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
+          keep_files: false
+          destination_dir: .
