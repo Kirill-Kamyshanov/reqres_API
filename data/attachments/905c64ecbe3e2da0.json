@@ -1,0 +1,16 @@
+{
+  "request_id": "6866d75789634f02821cad37df804233",
+  "method": "GET",
+  "url": "https://reqres.in/api/resource/23",
+  "headers": {
+    "User-Agent": "python-requests/2.32.5",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept": "application/json",
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
+    "x-api-key": "********************************************************************",
+    "X-Request-Id": "6866d75789634f02821cad37df804233"
+  },
+  "params": null,
+  "body": null
+}

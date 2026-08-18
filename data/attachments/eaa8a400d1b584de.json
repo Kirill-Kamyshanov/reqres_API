@@ -1,0 +1,20 @@
+# request_id=2162749342d34a9597175aa83814f4ae status=201 elapsed_ms=258
+{
+  "name": "Shannon Day",
+  "job": "Ranger/warden",
+  "id": "290",
+  "createdAt": "2026-08-18T17:14:50.844Z",
+  "_meta": {
+    "powered_by": "ReqRes",
+    "docs_url": "https://app.reqres.in/documentation",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "variant": "v1_b",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade"
+    },
+    "context": "legacy_success"
+  }
+}

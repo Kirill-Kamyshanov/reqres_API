@@ -1,0 +1,20 @@
+# request_id=3932e186dee24591b8f7dc4b3823940d status=201 elapsed_ms=170
+{
+  "name": "Brett Henry",
+  "job": "Museum/gallery exhibitions officer",
+  "id": "206",
+  "createdAt": "2026-08-18T17:14:51.123Z",
+  "_meta": {
+    "powered_by": "ReqRes",
+    "docs_url": "https://app.reqres.in/documentation",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "variant": "v1_b",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade"
+    },
+    "context": "legacy_success"
+  }
+}

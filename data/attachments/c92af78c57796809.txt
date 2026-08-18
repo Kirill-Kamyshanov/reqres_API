@@ -1,0 +1,4 @@
+
+Окружение: Stage
+- Reqres API: https://reqres.in/api
+

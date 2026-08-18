@@ -1,0 +1,14 @@
+# request_id=f6036486a2a44517b3acfe894b65bf88 status=200 elapsed_ms=254
+{
+  "data": {
+    "id": 2,
+    "name": "fuchsia rose",
+    "year": 2001,
+    "color": "#C74375",
+    "pantone_value": "17-2031"
+  },
+  "support": {
+    "url": "https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+    "text": "Become a better CTO. A playbook of painful stories and practical advice from a two-time startup CTO."
+  }
+}

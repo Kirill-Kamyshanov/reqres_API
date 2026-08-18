@@ -1,0 +1,27 @@
+# request_id=fcb68cb529fb4d7da17f8052750d7fd8 status=200 elapsed_ms=242
+{
+  "data": {
+    "id": 2,
+    "email": "janet.weaver@reqres.in",
+    "first_name": "Janet",
+    "last_name": "Weaver",
+    "avatar": "https://reqres.in/img/faces/2-image.jpg"
+  },
+  "support": {
+    "url": "https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+    "text": "Become a better CTO. A playbook of painful stories and practical advice from a two-time startup CTO."
+  },
+  "_meta": {
+    "powered_by": "ReqRes",
+    "docs_url": "https://app.reqres.in/documentation",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "variant": "v1_b",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade"
+    },
+    "context": "legacy_success"
+  }
+}
