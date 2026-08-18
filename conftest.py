@@ -32,14 +32,6 @@ def env_config(env: Environment) -> EnvironmentConfig:
     return config
 
 
-@pytest.fixture(scope="session")
-def test_data(env: Environment) -> dict:
-    """Загружает тестовые данные окружения из test_data/{env}.json."""
-    path = Path(__file__).parent / "test_data" / f"{env.value}.json"
-    with path.open(encoding="utf-8") as f:
-        return json.load(f)
-
-
 @pytest.fixture
 def api(env_config: EnvironmentConfig) -> ReqresApi:
     """Главный фасад над сервисом reqres.in: api.users / api.auth / api.resources."""
@@ -64,3 +56,16 @@ def cleanup() -> Generator[list[Callable[[], None]], None, None]:
             errors.append(exc)
     if errors:
         warnings.warn(f"Cleanup errors: {errors}", stacklevel=2)
+
+
+# ------------------------------------------------------------------
+#               Генерация/загрузка тестовых данных
+# ------------------------------------------------------------------
+
+
+@pytest.fixture(scope="session")
+def test_data(env: Environment) -> dict:
+    """Загружает тестовые данные окружения из test_data/{env}.json."""
+    path = Path(__file__).parent / "test_data" / f"{env.value}.json"
+    with path.open(encoding="utf-8") as f:
+        return json.load(f)
