@@ -1,0 +1,18 @@
+# request_id=55dc3e06f92142f2a9cd09c93331bb4b status=200 elapsed_ms=344
+{
+  "id": 4,
+  "token": "QpwL5tke4Pnpja7X4",
+  "_meta": {
+    "powered_by": "ReqRes",
+    "docs_url": "https://app.reqres.in/documentation",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "variant": "v1_b",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade"
+    },
+    "context": "legacy_success"
+  }
+}

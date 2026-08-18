@@ -1,0 +1,16 @@
+{
+  "request_id": "8bb2f6dc0f55459589bab42280bb8714",
+  "method": "DELETE",
+  "url": "https://reqres.in/api/users/153",
+  "headers": {
+    "User-Agent": "python-requests/2.32.5",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Accept": "application/json",
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
+    "x-api-key": "pub_f6037cc861d2afb108f79be7501585d460d58ccb5b98f04ab137141e6c257e00",
+    "X-Request-Id": "8bb2f6dc0f55459589bab42280bb8714"
+  },
+  "params": null,
+  "body": null
+}
