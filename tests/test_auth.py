@@ -15,9 +15,7 @@ from services.reqres_in.auth.models.auth import LoginRequest, RegisterRequest
 class TestAuth:
     @pytest.mark.smoke
     @allure.title("Успешная регистрация")
-    @allure.testcase("https://jira.example.com/TC-11", "TC-11")
     def test_register_successful(self, api, test_data):
-        """Проверяет успешную регистрацию с валидными данными."""
         with allure.step("Подготовка тела запроса"):
             body = RegisterRequest(**test_data["auth"]["register_valid"]).model_dump()
 
@@ -28,9 +26,7 @@ class TestAuth:
             assert_register_successful(response, validated)
 
     @allure.title("Регистрация с невалидными входными данными")
-    @allure.testcase("https://jira.example.com/TC-12", "TC-12")
     def test_register_negative(self, api, test_data):
-        """Проверяет, что регистрация без пароля возвращает 400 с описанием ошибки."""
         with allure.step("Отправка запроса без пароля"):
             response, validated = api.auth.register_expect_error(test_data["auth"]["register_invalid"])
 
@@ -39,9 +35,7 @@ class TestAuth:
 
     @pytest.mark.smoke
     @allure.title("Успешная авторизация")
-    @allure.testcase("https://jira.example.com/TC-13", "TC-13")
     def test_auth_successful(self, api, test_data):
-        """Проверяет успешную авторизацию с валидными данными."""
         with allure.step("Подготовка тела запроса"):
             body = LoginRequest.model_validate(test_data["auth"]["login_valid"]).model_dump()
 
@@ -52,9 +46,7 @@ class TestAuth:
             assert_login_successful(response, validated)
 
     @allure.title("Авторизация с невалидными входными данными")
-    @allure.testcase("https://jira.example.com/TC-14", "TC-14")
     def test_auth_negative(self, api, test_data):
-        """Проверяет, что авторизация без пароля возвращает 400 с описанием ошибки."""
         with allure.step("Отправка запроса без пароля"):
             response, validated = api.auth.login_expect_error(test_data["auth"]["login_invalid"])
 

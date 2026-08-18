@@ -1,9 +1,9 @@
 name: run tests
 
 on:
-  push:
-    branches-ignore:
-      - gh-pages
+#  push:
+#    branches-ignore:
+#      - gh-pages
   pull_request:
     branches:
       - main
