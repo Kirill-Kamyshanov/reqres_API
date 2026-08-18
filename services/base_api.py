@@ -11,6 +11,7 @@ from requests.adapters import HTTPAdapter
 from requests.exceptions import RequestException
 from urllib3.util.retry import Retry
 
+from config.environments import EnvironmentConfig
 from services.exceptions import ApiConnectionError, ApiError, ApiTimeoutError
 
 logger = logging.getLogger("api")
@@ -24,14 +25,14 @@ RETRY_STATUSES = (500, 502, 503, 504)
 class BaseAPI:
     """Базовый HTTP-клиент: единый _request с retry, structured-logging и request_id."""
 
-    def __init__(self, env_config, timeout: int = DEFAULT_TIMEOUT) -> None:
+    def __init__(self, env_config: EnvironmentConfig, timeout: int = DEFAULT_TIMEOUT) -> None:
         """Инициализирует клиент с базовым URL, таймаутом и преднастроенной requests.Session."""
         self.base_url = env_config.reqres_url.rstrip("/")
         self.timeout = timeout
         self.session = self._build_session(env_config)
 
     @staticmethod
-    def _build_session(env_config) -> Session:
+    def _build_session(env_config: EnvironmentConfig) -> Session:
         """Создаёт requests.Session с retry-политикой для 5xx, пулом соединений и дефолтными заголовками."""
         session = Session()
         retry = Retry(
@@ -66,7 +67,7 @@ class BaseAPI:
         self._attach_request(
             method=method,
             url=url,
-            headers={**self.session.headers, **headers},
+            headers=self._hide_secret_header("x-api-key", {**self.session.headers, **headers}),
             body=kwargs.get("json"),
             params=kwargs.get("params"),
             request_id=request_id,
@@ -103,6 +104,13 @@ class BaseAPI:
         )
         self._attach_response(response, elapsed_ms, request_id)
         return response
+
+    @staticmethod
+    def _hide_secret_header(secret_header: str, headers: dict) -> dict | None:
+        """Скрывает секретный хедер запроса в Allure отчёте при сохранении длины значения"""
+        if headers.get(secret_header):
+            headers[secret_header] = "*" * len(headers[secret_header])
+        return headers
 
     @staticmethod
     def _attach_request(

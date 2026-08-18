@@ -10,14 +10,12 @@ from utils.assertions import assert_status_code
 
 @allure.step("Проверка данных ресурса: ID={resource_id}")
 def assert_resource_data(response: Response, validated: SingleResourceResponse, resource_id: int) -> None:
-    """Проверяет успешное получение ресурса: статус 200 и совпадение ID."""
     assert_status_code(response, 200)
     assert validated.data.id == resource_id, f"Ожидался id={resource_id}, получен {validated.data.id}"
 
 
 @allure.step("Проверка списка ресурсов на странице {page}")
 def assert_resources_list(response: Response, validated: ResourcesListResponse, page: int) -> None:
-    """Проверяет список ресурсов: статус 200, корректную страницу и количество страниц."""
     assert_status_code(response, 200)
     assert validated.page == page, f"Ожидался page={page}, получен {validated.page}"
 

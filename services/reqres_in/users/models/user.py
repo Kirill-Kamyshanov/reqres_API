@@ -47,10 +47,10 @@ class CreateUserRequest(BaseModel):
     name: str = Field(default_factory=fake.name, min_length=2, max_length=25)
     job: str = Field(default_factory=fake.job)
 
-    @field_validator("name")
+    @field_validator("name", mode="before")
     @classmethod
-    def name_validator(cls, v):
-        """Нормализует имя до Title Case."""
+    def normalize_name(cls, v: str) -> str:
+        """Преобразует имя в Title Case ДО основной валидации."""
         return v.title()
 
 
@@ -59,16 +59,8 @@ class CreateUserResponse(BaseModel):
 
     name: str
     job: str
-    id: int
+    id: int = Field(gt=0)
     createdAt: datetime
-
-    @field_validator("id", mode="before")
-    @classmethod
-    def id_validator(cls, v):
-        v = int(v)
-        if v < 1:
-            raise ValueError(f"Error: id < 1 ({v})")
-        return v
 
 
 class UpdateUserRequest(BaseModel):

@@ -15,7 +15,7 @@ from services.reqres_in.auth.models.auth import LoginRequest, RegisterRequest
 class TestAuth:
     @pytest.mark.smoke
     @allure.title("Успешная регистрация")
-    def test_register_successful(self, api, test_data):
+    def test_register_successful(self, api, test_data: dict):
         with allure.step("Подготовка тела запроса"):
             body = RegisterRequest(**test_data["auth"]["register_valid"]).model_dump()
 
@@ -26,7 +26,7 @@ class TestAuth:
             assert_register_successful(response, validated)
 
     @allure.title("Регистрация с невалидными входными данными")
-    def test_register_negative(self, api, test_data):
+    def test_register_negative(self, api, test_data: dict):
         with allure.step("Отправка запроса без пароля"):
             response, validated = api.auth.register_expect_error(test_data["auth"]["register_invalid"])
 
@@ -35,7 +35,7 @@ class TestAuth:
 
     @pytest.mark.smoke
     @allure.title("Успешная авторизация")
-    def test_auth_successful(self, api, test_data):
+    def test_auth_successful(self, api, test_data: dict):
         with allure.step("Подготовка тела запроса"):
             body = LoginRequest.model_validate(test_data["auth"]["login_valid"]).model_dump()
 
@@ -46,7 +46,7 @@ class TestAuth:
             assert_login_successful(response, validated)
 
     @allure.title("Авторизация с невалидными входными данными")
-    def test_auth_negative(self, api, test_data):
+    def test_auth_negative(self, api, test_data: dict):
         with allure.step("Отправка запроса без пароля"):
             response, validated = api.auth.login_expect_error(test_data["auth"]["login_invalid"])
 

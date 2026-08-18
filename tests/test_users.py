@@ -16,7 +16,7 @@ from utils.assertions import assert_status_code
 @allure.feature("Users")
 class TestUsers:
     @allure.title("Проверка корректности пагинации")
-    def test_users_pagination(self, api, test_data):
+    def test_users_pagination(self, api, test_data: dict):
         with allure.step("Отправка GET-запроса с пагинацией"):
             page = test_data["users"]["pagination_page"]
             response, validated = api.users.list(page)
@@ -26,7 +26,7 @@ class TestUsers:
 
     @pytest.mark.smoke
     @allure.title("Получение данных о существующем пользователе по ID")
-    def test_get_user(self, api, test_data):
+    def test_get_user(self, api, test_data: dict):
         with allure.step("Получение данных о пользователе"):
             user_id = test_data["users"]["valid_id"]
             response, validated = api.users.get_by_id(user_id)
@@ -35,7 +35,7 @@ class TestUsers:
             assert_user_data(response, validated, user_id)
 
     @allure.title("Получение данных о несуществующем пользователе")
-    def test_get_user_negative(self, api, test_data):
+    def test_get_user_negative(self, api, test_data: dict):
         with allure.step("Попытка получить данные о несуществующем пользователе"):
             invalid_id = test_data["users"]["invalid_id"]
             response, _ = api.users.get_by_id(invalid_id, validate=False)
@@ -55,7 +55,7 @@ class TestUsers:
             assert_user_created(response, validated, new_user.name, new_user.job)
 
     @allure.title("Полное обновление данных пользователя методом PUT")
-    def test_update_user_put(self, api, test_data):
+    def test_update_user_put(self, api, test_data: dict):
         with allure.step("Подготовка данных для обновления"):
             user_id = test_data["users"]["valid_id"]
             new_data = UpdateUserRequest()
@@ -67,7 +67,7 @@ class TestUsers:
             assert_user_updated(response, validated, **new_data.model_dump())
 
     @allure.title("Частичное обновление данных пользователя методом PATCH")
-    def test_update_user_patch(self, api, test_data):
+    def test_update_user_patch(self, api, test_data: dict):
         with allure.step("Подготовка данных для обновления"):
             user_id = test_data["users"]["valid_id"]
             new_data = UpdateUserRequest()

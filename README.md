@@ -62,6 +62,10 @@ docker-compose run tests --env=stage - запуск тестов в опреде
 allure serve # просмотр на локальном сервере
 allure generate -c allure-results -o allure-report allure-results # генерация файлов с отчётами
 ```
+
+Пример отчёта:
+![report_example.png](report_example.png)
+
 ---
 
 ## Запуск тестов в CI/CD Pipeline
@@ -72,17 +76,16 @@ CI/CD Pipeline автоматически запускает тесты при p
 ---
 
 ## Структура проекта
-
 ```
-framework2/
+reqres_API/
 ├── config/
-│   └── environments.py        # окружения (dev/stage) и загрузка конфига
+│   └── environments.py         # окружения (dev/stage) и загрузка конфига
 ├── services/
-│   ├── base_api.py            # базовый HTTP-клиент с retry/логами/маскированием секретов
-│   ├── exceptions.py          # типизированные исключения транспорта
+│   ├── base_api.py             # базовый HTTP-клиент с retry/логами/маскированием секретов
+│   ├── exceptions.py           # типизированные исключения транспорта
 │   └── reqres_in/
-│       ├── api.py             # ReqresApi — точка входа: api.users / api.auth / api.resources
-│       ├── auth/              # клиент + проверки + модели для /login и /register
+│       ├── api.py              # ReqresApi — точка входа: api.users / api.auth / api.resources
+│       ├── auth/               # клиент + проверки + модели для /login и /register
 │       ├── users/              # клиент + проверки + модели для /users
 │       └── resources/          # клиент + проверки + модели для /resources
 ├── tests/
@@ -93,8 +96,11 @@ framework2/
 │   ├── dev.json               # тестовые данные для окружения dev
 │   └── stage.json             # для stage
 ├── utils/
-│   └── assertions.py          # общие проверки (assert_status_code)
-├── conftest.py                # pytest-фикстуры (env, api, cleanup, test_data)
+│   └── assertions.py          # общие проверки
+├── conftest.py                # общие для проекта pytest-фикстуры (env, api, cleanup, test_data)
 ├── pyproject.toml             # конфиг pytest + ruff
-└── requirements.txt
+└── uv.lock                    # точные версии всех зависимостей проекта на момент последнего разрешения
+└── .pre-commit-config.yaml    # конфигурация pre-commit для проверки кода перед коммитом
+└── Dockerfile                 # поэтапное описание сборки проекта
+└── docker-compose.yml         # конфигурация для сборки проекта с сохранением allure-отчёта на хосте
 ```
